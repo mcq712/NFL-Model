@@ -46,49 +46,6 @@ for i in team_abbreviations:
 all_dfs = pd.concat(df_holder)
 print(all_dfs)
 
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['PassYds'], color = 'red')
-# plt.title('Team Scores Vs. Passing Yards', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Passing Yards', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['RushYds'], color = 'blue')
-# plt.title('Team Scores Vs. Rushing Yards', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Rushing Yards', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['3DConv'], color = 'green')
-# plt.title('Team Scores Vs. 3rd Down Conversions', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('3rd Down Conversions', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['Pnt'], color = 'orange')
-# plt.title('Team Scores Vs. Punts', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Punts', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['PasserRate'], color = 'cyan')
-# plt.title('Team Scores Vs. Passer Rating', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Passer Rating', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['ToP'], color = 'pink')
-# plt.title('Team Scores Vs. Time of Possession', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Time of Possession', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-
 # here we have 2 variables for multiple regression. If you just want to use one variable for simple linear regression, then use X = df['Interest_Rate'] for example.Alternatively, you may add additional variables within the brackets
 
 x = all_dfs[['PassYds','PasserRate', 'RushYds']]

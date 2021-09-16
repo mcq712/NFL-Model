@@ -129,7 +129,7 @@
 #
 # # Rename rest of the Columns
 #
-# NEPatsD.columns = ['Off_1stD', 'Off_TotYd', 'Off_TO', 'Def_1stD', 'Def_TotYd', 'Def_TO', 'Exp_OffPts', 'Exp_DefPts',
+# NEPatsD.columns = ['Def_1stD', 'Def_TotYd', 'Def_TO', 'Exp_OffPts', 'Exp_DefPts',
 #                    'Exp_SpTms_Pts']
 #
 # NEPatsD = NEPatsD[pd.notnull(NEPatsD['Off_1stD'])]

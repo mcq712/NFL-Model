@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+import seaborn as sns
 # from urllib.request import urlopen
 
 # from joblib.numpy_pickle_utils import xrange
@@ -9,11 +9,10 @@ import pandas as pd
 # display entire table
 import matplotlib.pyplot as plt
 
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
 
-import statsmodels.api as sm
-# from pandas import DataFrame
-from statsmodels.regression import linear_model
-import statsmodels.api as sm
+from sklearn import metrics
 from sklearn import linear_model
 pd.set_option('display.max_rows', None, 'display.max_columns', None)
 pd.set_option('display.width', None)
@@ -27,9 +26,12 @@ team_abbreviations = ['buf','mia','nwe','nyj','htx','clt','jax','oti','cin','pit
                       'car','nor','tam','atl','chi','det','gnb','min','crd','ram','sea','sfo']
 df_holder = []
 
+
 for i in team_abbreviations:
     url_main = 'https://www.pro-football-reference.com/teams/{0}/2020/gamelog/'.format(i)
+    url_extra = 'https://www.pro-football-reference.com/teams/{0}/2020.htm'.format(i)
     data = pd.read_html(url_main)[0]
+    data_extra = pd.read_html(url_extra)[1]
     data.rename(columns={'Unnamed: 3_level_1': 'Box_link'}, inplace=True)
     data.rename(columns={'Unnamed: 4_level_1': 'W/L'}, inplace=True)
     data.rename(columns={'Unnamed: 6_level_1': '@'}, inplace=True)
@@ -39,70 +41,81 @@ for i in team_abbreviations:
                     'PassNY/A', 'Cmp%', 'PasserRate', 'RushAtt', 'RushYds', 'RushY/A', 'RushTD', 'FGM', 'FGA', 'XPM',
                     'XPA', 'Pnt', 'PntYds', '3DConv', '3DAtt', '4DConv', '4DAtt', 'ToP']
     data = data[pd.notnull(data['Opp_Score'])]
-    data.insert(6, 'Team', i)
+
+    data.insert(0, 'Team', i)
     data.insert(11, 'Total Score', data['Tm_Score'] + data['Opp_Score'])
     df_holder.append(data)
 
 all_dfs = pd.concat(df_holder)
+
 # print(all_dfs)
 
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['PassYds'], color = 'red')
-# plt.title('Team Scores Vs. Passing Yards', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Passing Yards', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['RushYds'], color = 'blue')
-# plt.title('Team Scores Vs. Rushing Yards', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Rushing Yards', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['3DConv'], color = 'green')
-# plt.title('Team Scores Vs. 3rd Down Conversions', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('3rd Down Conversions', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['Pnt'], color = 'orange')
-# plt.title('Team Scores Vs. Punts', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Punts', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-#
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['PasserRate'], color = 'cyan')
-# plt.title('Team Scores Vs. Passer Rating', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Passer Rating', fontsize = 14)
-# plt.grid(True)
-# plt.show()
-# # Figure out how to deal with time data
-# plt.scatter(all_dfs['Tm_Score'], all_dfs['ToP'], color = 'pink')
-# plt.title('Team Scores Vs. Time of Possession', fontsize= 14)
-# plt.xlabel ('Team Score', fontsize = 14)
-# plt.ylabel('Time of Possession', fontsize = 14)
-# plt.grid(True)
-# plt.show()
+# url_extra = 'https://www.pro-football-reference.com/teams/buf/2020.htm'
+# data_extra = pd.read_html(url_extra)[1]
+
+url_per_game_o = 'https://www.espn.com/nfl/stats/team'
+url_per_game_d = 'https://www.espn.com/nfl/stats/team/_/view/defense'
+per_game_o = pd.read_html(url_per_game_o)
+per_game_d = pd.read_html(url_per_game_d)
+
+# print(per_game_o)
+# print(per_game_d)
+
+
+
 
 # here we have 2 variables for multiple regression. If you just want to use one variable for simple linear regression, then use X = df['Interest_Rate'] for example.Alternatively, you may add additional variables within the brackets
 
-x = all_dfs[['PassYds','PasserRate', 'RushYds', 'Pnt', '3DConv']]
+x = all_dfs[['PassYds','PasserRate', 'RushYds', '3DConv']]
 y = all_dfs['Tm_Score']
 
 regr = linear_model.LinearRegression()
 regr.fit(x,y)
-print('Intercept: \n', regr.intercept_)
-print('Coefficients: \n', regr.coef_)
-
-# url_second = 'https://www.pro-football-reference.com/years/2021/#team_stats'
+# print('Intercept: \n', regr.intercept_)
+# print('Coefficients: \n', regr.coef_)
+#
+# # url_second = 'https://www.pro-football-reference.com/years/2021/#team_stats'
 #
 # team_averages = pd.read_html(url_second)
 
 # print(team_averages)
-predicted_points = regr.predict([[133, 115.0, 200, 4, 14]])
-print(predicted_points)
+predicted_team_1 = regr.predict([[194, 107.3, 145.5, 5]])
+predicted_team_2 = regr.predict([[294,87.05,75, 10]])
+
+# print('WFT: ' + str(predicted_team_1))
+#
+# print('NYG: ' + str(predicted_team_2))
+# total_points = predicted_team_1 + predicted_team_2
+# print('Total Points: ' + str(total_points))
+#
+# spread = predicted_team_1 - predicted_team_2
+#
+# print(spread)
+
+x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+
+model = LinearRegression()
+
+model.fit(x_train, y_train)
+print(model.coef_)
+print(model.intercept_)
+
+coeff_df = pd.DataFrame(model.coef_, x.columns, columns=['Coeff'])
+
+print(coeff_df)
+
+
+predictions = model.predict(x_test)
+
+plt.scatter(y_test, predictions)
+plt.show()
+
+plt.hist(y_test - predictions)
+plt.show()
+
+absolute_error = metrics.mean_absolute_error(y_test, predictions)
+mse = metrics.mean_squared_error(y_test, predictions)
+rmse = np.sqrt(metrics.mean_squared_error(y_test, predictions))
+print(rmse)
+print(mse)
+print(absolute_error)
