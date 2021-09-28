@@ -68,7 +68,7 @@ per_game_d = pd.read_html(url_per_game_d)
 
 x = all_dfs[['PassYds','PasserRate', 'RushYds', '3DConv']]
 y = all_dfs['Tm_Score']
-
+print(all_dfs)
 regr = linear_model.LinearRegression()
 regr.fit(x,y)
 # print('Intercept: \n', regr.intercept_)
@@ -79,43 +79,43 @@ regr.fit(x,y)
 # team_averages = pd.read_html(url_second)
 
 # print(team_averages)
-predicted_team_1 = regr.predict([[194, 107.3, 145.5, 5]])
-predicted_team_2 = regr.predict([[294,87.05,75, 10]])
+predicted_team_1 = regr.predict([[219, 95.55, 117.75, 5.25]])
+predicted_team_2 = regr.predict([[346, 92.95, 124.75, 7.5]])
 
-# print('WFT: ' + str(predicted_team_1))
-#
-# print('NYG: ' + str(predicted_team_2))
-# total_points = predicted_team_1 + predicted_team_2
-# print('Total Points: ' + str(total_points))
+print('Eagles: ' + str(predicted_team_1))
+
+print('Cowboys: ' + str(predicted_team_2))
+total_points = predicted_team_1 + predicted_team_2
+print('Total Points: ' + str(total_points))
 #
 # spread = predicted_team_1 - predicted_team_2
 #
 # print(spread)
 
-x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+# x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.3)
+#
+# model = LinearRegression()
+#
+# model.fit(x_train, y_train)
+# print(model.coef_)
+# print(model.intercept_)
+#
+# coeff_df = pd.DataFrame(model.coef_, x.columns, columns=['Coeff'])
+#
+# print(coeff_df)
 
-model = LinearRegression()
 
-model.fit(x_train, y_train)
-print(model.coef_)
-print(model.intercept_)
-
-coeff_df = pd.DataFrame(model.coef_, x.columns, columns=['Coeff'])
-
-print(coeff_df)
-
-
-predictions = model.predict(x_test)
-
-plt.scatter(y_test, predictions)
-plt.show()
-
-plt.hist(y_test - predictions)
-plt.show()
-
-absolute_error = metrics.mean_absolute_error(y_test, predictions)
-mse = metrics.mean_squared_error(y_test, predictions)
-rmse = np.sqrt(metrics.mean_squared_error(y_test, predictions))
-print(rmse)
-print(mse)
-print(absolute_error)
+# predictions = model.predict(x_test)
+#
+# plt.scatter(y_test, predictions)
+# plt.show()
+#
+# plt.hist(y_test - predictions)
+# plt.show()
+#
+# absolute_error = metrics.mean_absolute_error(y_test, predictions)
+# mse = metrics.mean_squared_error(y_test, predictions)
+# rmse = np.sqrt(metrics.mean_squared_error(y_test, predictions))
+# print(rmse)
+# print(mse)
+# print(absolute_error)
