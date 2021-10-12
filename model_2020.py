@@ -181,34 +181,33 @@ def score_prediction(team_name1, opp_team_name1, team_name2, opp_team_name2):
     return
 
 
-score_prediction('cin', 'Jacksonville Jaguars', 'jax', 'Cincinnati Bengals')
-
-score_prediction('nor', 'New York Giants', 'nyg', 'New Orleans Saints')
-
-score_prediction('cle', 'Minnesota Vikings', 'min', 'Cleveland Browns')
-
-score_prediction('dal', 'Carolina Panthers', 'car', 'Dallas Cowboys')
-
-score_prediction('htx', 'Buffalo Bills', 'buf', 'Houston Texans')
-
-score_prediction('oti', 'New York Jets', 'nyj', 'Tennessee Titans')
-
-score_prediction('clt', 'Miami Dolphins', 'mia', 'Indianapolis Colts')
-
-score_prediction('kan', 'Philadelphia Eagles', 'phi', 'Kansas City Chiefs')
-
-score_prediction('was', 'Atlanta Falcons', 'atl', 'Washington Football Team')
-
-score_prediction('chi', 'Detroit Lions', 'det', 'Chicago Bears')
-
-score_prediction('crd', 'Los Angeles Rams', 'ram', 'Arizona Cardinals')
-
-score_prediction('sea', 'San Francisco 49ers', 'sfo', 'Seattle Seahawks')
-
-score_prediction('den', 'Baltimore Ravens', 'rav', 'Denver Broncos')
-
-score_prediction('pit', 'Green Bay Packers', 'gnb', 'Pittsburgh Steelers')
-
-score_prediction('tam', 'New England Patriots', 'nwe', 'Tampa Bay Buccaneers')
-
-score_prediction('sdg', 'Las Vegas Raiders', 'rai', 'Los Angeles Chargers')
+score_prediction('ram', 'Seattle Seahawks', 'sea', 'Los Angeles Rams')
+# score_prediction('det', 'Minnesota Vikings', 'min', 'Detroit Lions')
+# score_prediction('nwe', 'Houston Texans', 'htx', 'New England Patriots')
+# #
+# score_prediction('phi', 'Carolina Panthers', 'car', 'Philadelphia Eagles')
+#
+# score_prediction('was', 'New Orleans Saints', 'nor', 'Washington Football Team')
+# #
+# #
+# score_prediction('oti', 'Jacksonville Jaguars', 'jax', 'Tennessee Titans')
+# #
+# score_prediction('mia', 'Tampa Bay Buccaneers', 'tam', 'Miami Dolphins')
+# #
+# score_prediction('gnb', 'Cincinnati Bengals', 'cin', 'Green Bay Packers')
+# #
+# score_prediction('den', 'Pittsburgh Steelers', 'pit', 'Denver Broncos')
+# #
+# score_prediction('chi', 'Las Vegas Raiders', 'rai', 'Chicago Bears')
+# #
+# score_prediction('crd', 'San Francisco 49ers', 'sfo', 'Arizona Cardinals')
+# #
+# score_prediction('cle', 'Los Angeles Chargers', 'sdg', 'Cleveland Browns')
+# #
+# score_prediction('nyg', 'Dallas Cowboys', 'dal', 'New York Giants')
+# #
+# score_prediction('kan', 'Buffalo Bills', 'buf' ,'Kansas City Chiefs')
+#
+#
+# score_prediction('clt', 'Baltimore Ravens', 'rav', 'Indianapolis Colts')
+# #
